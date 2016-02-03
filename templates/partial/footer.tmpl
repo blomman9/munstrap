@@ -7,22 +7,7 @@
     </div>
 
     <script src="<TMPL_VAR NAME="R_PATH">/static/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-      //Bootstrap tab anchor fix
-      var url = document.location.toString();
-      if (url.match('#')) {
-        var taget = url.split('#')[1];
-        $('.nav-tabs a[href=#' + taget + ']').tab('show');
-        $('.tab-pane.active').removeClass('active');
-        $('.tab-pane.in').removeClass('in');
-        $('#' + taget).addClass('active');
-        $('#' + taget).addClass('in');
-        $('#' + taget).addClass('fade');
-      }
-      $('.nav-tabs a').on('shown', function (e) {
-        window.location.hash = e.target.hash;
-      });
-    </script>
+    <script src="<TMPL_VAR NAME="R_PATH">/static/js/munstrap.min.js"></script>
   </body>
 </html>
 
