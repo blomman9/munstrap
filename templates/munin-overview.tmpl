@@ -11,19 +11,59 @@
       <div class="alert alert-warning">There are <a href="<TMPL_VAR NAME="R_PATH">/problems.html#warnings"><TMPL_VAR NAME="NWARNING"> warnings</a></div>
     </TMPL_IF>
 
+    <article>
+
+
+    <TMPL_LOOP NAME="SERVICES">
+      <div class="service row">
+        <div class="node col-md-12">
+          <h3 id="<TMPL_VAR ESCAPE="HTML" NAME="name">"><TMPL_VAR ESCAPE="HTML" NAME="NAME"></h3>
+        </div>
+          <TMPL_LOOP NAME="GRAPHS">
+            <div class="node col-md-6">
+              <a href="<TMPL_VAR NAME="HOST_URL">"><TMPL_VAR ESCAPE="HTML" NAME="NODENAME"></a>
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <TMPL_IF NAME="URLX">
+                <a <TMPL_IF NAME="STATE_WARNING">class="warn"</TMPL_IF>
+                <TMPL_IF NAME="STATE_CRITICAL">class="crit"</TMPL_IF> href="<TMPL_VAR NAME="URLX">">
+              </TMPL_IF>
+              <TMPL_VAR ESCAPE="HTML" NAME="LABEL">
+              <TMPL_IF NAME="URLX"></a></TMPL_IF>
+              <br/>
+              <a href="<TMPL_VAR NAME="URLX">">
+                <TMPL_IF NAME="TIMEDAY">
+                  <img src="<TMPL_VAR NAME="CIMGDAY">" alt="<TMPL_VAR ESCAPE="HTML" NAME="LABEL">"
+        class="img-responsive i<TMPL_IF NAME="STATE_WARNING"> warn</TMPL_IF><TMPL_IF NAME="STATE_CRITICAL"> crit</TMPL_IF>"
+                   <TMPL_IF NAME="IMGDAYWIDTH">width="<TMPL_VAR NAME="IMGDAYWIDTH">" </TMPL_IF>
+                   <TMPL_IF NAME="IMGDAYHEIGHT">height="<TMPL_VAR NAME="IMGDAYHEIGHT">"</TMPL_IF>/>
+                </TMPL_IF>
+                <TMPL_IF NAME="TIMEWEEK">
+                  <img src="<TMPL_VAR NAME="CIMGWEEK">" alt="<TMPL_VAR ESCAPE="HTML" NAME="LABEL">"
+        class="img-responsive i<TMPL_IF NAME="STATE_WARNING"> warn</TMPL_IF><TMPL_IF NAME="STATE_CRITICAL"> crit</TMPL_IF>"
+                   <TMPL_IF NAME="IMGWEEKWIDTH">width="<TMPL_VAR NAME="IMGWEEKWIDTH">" </TMPL_IF>
+                   <TMPL_IF NAME="IMGWEEKHEIGHT">height="<TMPL_VAR NAME="IMGWEEKHEIGHT">"</TMPL_IF>/>
+                </TMPL_IF>
+              </a>
+            </div>
+          </TMPL_LOOP>
+      </div>
+    </TMPL_LOOP>
+
+  </article>
+
     <ul class="groupview">
     <TMPL_LOOP NAME="GROUPS">
 		<TMPL_UNLESS NAME="MULTIGRAPH">
 		  <li  <TMPL_IF NAME="__LAST__">class="last"</TMPL_IF>>
-			  <span class="glyphicon glyphicon-folder-open"></span>	
+			  <span class="glyphicon glyphicon-folder-open"></span>
 			  <a href="<TMPL_VAR NAME="URL">" class="link-domain"><TMPL_VAR ESCAPE="HTML" NAME="NAME"></a>
-			  <TMPL_IF NAME="COMPARE"> [ 
-					<a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-day.html">day</a> 
-					<a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-week.html">week</a> 
-					<a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-month.html">month</a> 
+			  <TMPL_IF NAME="COMPARE"> [
+					<a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-day.html">day</a>
+					<a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-week.html">week</a>
+					<a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-month.html">month</a>
 					<a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-year.html">year</a> ]
 				</TMPL_IF>
-				<TMPL_IF NAME="NCATEGORIES">[ 
+				<TMPL_IF NAME="NCATEGORIES">[
           <TMPL_LOOP NAME="CATEGORIES">
             <a <TMPL_IF NAME="STATE_WARNING">class="text-warning"</TMPL_IF> <TMPL_IF NAME="STATE_CRITICAL">class="text-critical"</TMPL_IF> href="<TMPL_VAR NAME="URL">"><TMPL_VAR ESCAPE="HTML" NAME="NAME"></a>
           </TMPL_LOOP> ]
@@ -34,15 +74,15 @@
               <li <TMPL_IF NAME="__LAST__">class="last"</TMPL_IF>>
 		<span class="glyphicon glyphicon-chevron-right"></span>
                 <a href="<TMPL_VAR NAME="URL">" class="link-host"><TMPL_VAR ESCAPE="HTML" NAME="NAME"></a>
-                <TMPL_IF NAME="COMPARE"> [ 
-                  <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-day.html">day</a> 
-                  <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-week.html">week</a> 
-                  <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-month.html">month</a> 
+                <TMPL_IF NAME="COMPARE"> [
+                  <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-day.html">day</a>
+                  <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-week.html">week</a>
+                  <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-month.html">month</a>
                   <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-year.html">year</a> ]
                 </TMPL_IF>
-                <TMPL_IF NAME="NCATEGORIES">[ 
+                <TMPL_IF NAME="NCATEGORIES">[
                   <TMPL_LOOP NAME="CATEGORIES">
-                    <a <TMPL_IF NAME="STATE_WARNING">class="text-warning"</TMPL_IF> <TMPL_IF NAME="STATE_CRITICAL">class="text-critical"</TMPL_IF> href="<TMPL_VAR NAME="URL">"><TMPL_VAR ESCAPE="HTML" NAME="NAME"></a> 
+                    <a <TMPL_IF NAME="STATE_WARNING">class="text-warning"</TMPL_IF> <TMPL_IF NAME="STATE_CRITICAL">class="text-critical"</TMPL_IF> href="<TMPL_VAR NAME="URL">"><TMPL_VAR ESCAPE="HTML" NAME="NAME"></a>
                   </TMPL_LOOP>]
                 </TMPL_IF>
                 <ul>
@@ -50,15 +90,15 @@
                     <TMPL_UNLESS NAME="MULTIGRAPH">
                       <li <TMPL_IF NAME="__LAST__">class="last"</TMPL_IF>>
                       <a href="<TMPL_VAR NAME="URL">"><TMPL_VAR ESCAPE="HTML" NAME="NAME"></a>
-                      <TMPL_IF NAME="COMPARE"> 
-                        <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-day.html">day</a> 
-                        <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-week.html">week</a> 
-                        <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-month.html">month</a> 
+                      <TMPL_IF NAME="COMPARE">
+                        <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-day.html">day</a>
+                        <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-week.html">week</a>
+                        <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-month.html">month</a>
                         <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-year.html">year</a> ]
                       </TMPL_IF>
-                      <TMPL_IF NAME="NCATEGORIES">[ 
+                      <TMPL_IF NAME="NCATEGORIES">[
                         <TMPL_LOOP NAME="CATEGORIES">
-                          <a <TMPL_IF NAME="STATE_WARNING">class="text-warning"</TMPL_IF> <TMPL_IF NAME="STATE_CRITICAL">class="text-critical"</TMPL_IF> href="<TMPL_VAR NAME="URL">"><TMPL_VAR ESCAPE="HTML" NAME="NAME"></a> 
+                          <a <TMPL_IF NAME="STATE_WARNING">class="text-warning"</TMPL_IF> <TMPL_IF NAME="STATE_CRITICAL">class="text-critical"</TMPL_IF> href="<TMPL_VAR NAME="URL">"><TMPL_VAR ESCAPE="HTML" NAME="NAME"></a>
                         </TMPL_LOOP>]
                       </TMPL_IF>
                       <ul>
@@ -66,13 +106,13 @@
                           <TMPL_UNLESS NAME="MULTIGRAPH">
                             <li <TMPL_IF NAME="__LAST__">class="last"</TMPL_IF>>
                             <a href="<TMPL_VAR NAME="URL">"><TMPL_VAR ESCAPE="HTML" NAME="NAME"></a>
-                            <TMPL_IF NAME="COMPARE"> [ 
-                              <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-day.html">day</a> 
-                              <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-week.html">week</a> 
-                              <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-month.html">month</a> 
+                            <TMPL_IF NAME="COMPARE"> [
+                              <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-day.html">day</a>
+                              <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-week.html">week</a>
+                              <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-month.html">month</a>
                               <a href="<TMPL_VAR NAME="R_PATH">/<TMPL_LOOP NAME="PATH"><TMPL_IF NAME="pathname"><TMPL_VAR ESCAPE="URL" NAME="PATHNAME">/</TMPL_IF></TMPL_LOOP>comparison-year.html">year</a> ]
                             </TMPL_IF>
-                            <TMPL_IF NAME="NCATEGORIES">[ 
+                            <TMPL_IF NAME="NCATEGORIES">[
                               <TMPL_LOOP NAME="CATEGORIES">
                                 <a <TMPL_IF NAME="STATE_WARNING">class="text-warning"</TMPL_IF> <TMPL_IF NAME="STATE_CRITICAL">class="text-critical"</TMPL_IF> href="<TMPL_VAR NAME="URL">"><TMPL_VAR ESCAPE="HTML" NAME="NAME"></a>
                               </TMPL_LOOP> ]
@@ -81,8 +121,8 @@
                         </TMPL_LOOP>
                       </ul>
                   </TMPL_UNLESS></TMPL_LOOP>
-                </ul>	
-              </li>	
+                </ul>
+              </li>
             </TMPL_UNLESS>
           </TMPL_LOOP>
 			  </ul>
